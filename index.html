@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mortgage Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=DM+Serif+Text&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+<style>
+
+body{
+background-repeat: no-repeat;
+  background-size: auto;
+  background-size: cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  url(https://images.unsplash.com/photo-1509470578905-4a29e9a1a4d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+  height: 80vh;
+  color: aliceblue;
+}
+
+.container {
+    margin-top: 300px;
+}
+
+form {
+    font-size: 20px;
+    font-family: 'DM Serif Text', serif;
+}
+#pmt {
+   width: 40%;
+   margin: 10px auto;
+   
+}
+
+</style>
+<div class="container">
+    <h2 class="text-center">Mortgage Calculator </h2>
+    <form action="" class="text-center mt-5">
+        <div class="form-group">
+        <label>Interest (%): <input type="text" class="form-control" id="apr" name="APR"/></label>
+        <label>Loan Term (years): <input type="text" class="form-control" id="term" name="APR"/></label>
+        <label>Loan Amount ($): <input type="text" class="form-control" id="amt" name="amt"/></label>
+        <input type="text" class="form-control" id="pmt" name="mPmt"/>
+        <input type="button" class="btn btn-info" id="sbt" value="Submit" />
+        <input type="reset" class="btn btn-info" id="rst" value="Reset Form" />
+      </form>
+    </div>
+</div>
+
+      <script>
+
+var term;
+var apr;
+var amt;
+var mPmt;
+
+  document.getElementById("apr").focus();
+  document.getElementById("sbt").onclick = getValues;
+
+function getValues(){
+  term = document.getElementById("term").value;
+  apr = document.getElementById("apr").value;
+  amt = document.getElementById("amt").value;
+  apr /= 1200;
+  term *= 12;
+  mPmt = calculatePayment();
+  document.getElementById("pmt").value = "$" + mPmt.toFixed(2);
+};
+
+function calculatePayment(){
+	var payment = amt*(apr * Math.pow((1 + apr), term))/(Math.pow((1 + apr), term) - 1);
+	return payment;
+}
+      </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
